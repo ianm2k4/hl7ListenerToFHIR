@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.qwik</groupId>
+    <artifactId>hl7ListenerToFHIR</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <deploy.path>file:///${project.build.directory}/${project.build.finalName}</deploy.path>
+      </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-base -->
+        <dependency>
+          <groupId>ca.uhn.hapi.fhir</groupId>
+          <artifactId>hapi-fhir-base</artifactId>
+          <version>7.0.2</version>
+        </dependency>
+        
+        
+        <dependency>
+          <groupId>ca.uhn.hapi.fhir</groupId>
+          <artifactId>hapi-fhir-base</artifactId>
+          <version>7.0.2</version>
+          <exclusions>
+            <exclusion>
+              <artifactId>commons-lang3</artifactId>
+              <groupId>org.apache.commons</groupId>
+            </exclusion>
+            <exclusion>
+              <artifactId>jackson-core</artifactId>
+              <groupId>com.fasterxml.jackson.core</groupId>
+            </exclusion>
+            <exclusion>
+              <artifactId>jackson-annotations</artifactId>
+              <groupId>com.fasterxml.jackson.core</groupId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-structures-r4 -->
+        <dependency>
+          <groupId>ca.uhn.hapi.fhir</groupId>
+          <artifactId>hapi-fhir-structures-r4</artifactId>
+          <version>7.0.2</version>
+          <exclusions>
+            <exclusion>
+              <artifactId>hapi-fhir-base</artifactId>
+              <groupId>ca.uhn.hapi.fhir</groupId>
+            </exclusion>
+            <exclusion>
+              <artifactId>hapi-fhir-base</artifactId>
+              <groupId>ca.uhn.hapi.fhir</groupId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+        
+            <dependency>
+              <groupId>ca.uhn.hapi</groupId>
+              <artifactId>hapi-dist</artifactId>
+              <version>2.5.1</version>
+              <type>pom</type>
+              <exclusions>
+                <exclusion>
+                  <artifactId>slf4j-api</artifactId>
+                  <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                  <artifactId>slf4j-api</artifactId>
+                  <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                  <artifactId>slf4j-api</artifactId>
+                  <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                  <artifactId>hapi-examples</artifactId>
+                  <groupId>ca.uhn.hapi</groupId>
+                </exclusion>
+              </exclusions>
+            </dependency>
+        
+            <dependency>
+              <groupId>junit</groupId>
+              <artifactId>junit</artifactId>
+              <version>4.11</version>
+              <scope>test</scope>
+            </dependency>
+          </dependencies>
+        
+          <distributionManagement>
+            <repository>
+              <id>hl7ListenerToFHIR.deploy</id>
+              <name>Deployment</name>
+              <url>${deploy.path}</url>
+            </repository>
+        </distributionManagement>
+        
+          <build>
+            <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+              <plugins>
+                <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+                <plugin>
+                  <artifactId>maven-clean-plugin</artifactId>
+                  <version>3.1.0</version>
+                </plugin>
+                <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+                <plugin>
+                  <artifactId>maven-resources-plugin</artifactId>
+                  <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                  <artifactId>maven-compiler-plugin</artifactId>
+                  <version>3.8.0</version>
+                </plugin>
+                <plugin>
+                  <artifactId>maven-surefire-plugin</artifactId>
+                  <version>2.22.1</version>
+                </plugin>
+                <plugin>
+                  <artifactId>maven-jar-plugin</artifactId>
+                  <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                  <artifactId>maven-install-plugin</artifactId>
+                  <version>2.5.2</version>
+                </plugin>
+                <plugin>
+                  <artifactId>maven-deploy-plugin</artifactId>
+                  <version>2.8.2</version>
+                </plugin>
+                <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+                <plugin>
+                  <artifactId>maven-site-plugin</artifactId>
+                  <version>3.7.1</version>
+                </plugin>
+                <plugin>
+                  <artifactId>maven-project-info-reports-plugin</artifactId>
+                  <version>3.0.0</version>
+                </plugin>
+              </plugins>
+            </pluginManagement>
+          </build>
+
+</project>
